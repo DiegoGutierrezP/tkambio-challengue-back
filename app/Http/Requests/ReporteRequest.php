@@ -23,10 +23,27 @@ class ReporteRequest extends FormRequest
      */
     public function rules()
     {
-        return [
-            'title' => 'required|string',
-            'start'=>'required|date',
-            'end'=>'required|date'
-        ];
+        $reglas = [];
+
+        if($this->isMethod('post')){
+            $reglas = [
+                'title' => 'required|string',
+                'start'=>'required|date',
+                'end'=>'required|date'
+            ];
+        }
+        if($this->route('report_id')){
+            $reglas = [
+                'id' => 'required|integer|exists:reports,id'
+            ];
+        }
+        return $reglas;
+
+    }
+
+    public function prepareForValidation(){
+        if($this->route('report_id')){
+            $this->merge(['id' => $this->route('report_id')]);
+        }
     }
 }
