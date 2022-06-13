@@ -20,9 +20,14 @@ class ReporteController extends Controller
 
             GenerateReportExcel::dispatch($nombreFile,$request);//queue
 
+            Report::create([
+                'title'=>$request->title,
+                'report_link'=> Storage::url('reports/'.$nombreFile)
+            ]);
+
             return response()->json([
                 'res'=>true,
-                'msg'=>'se genero el reporte correctamente '
+                'msg'=>'Se genero el reporte correctamente '
             ],200);
         }catch(Exception $err){
             return response()->json([
@@ -44,7 +49,7 @@ class ReporteController extends Controller
 
     public function listarReportes(){
 
-        $reportes = Report::all();
+        $reportes = Report::orderBy('id', 'DESC')->get();
 
         return response()->json([
             'res'=>true,

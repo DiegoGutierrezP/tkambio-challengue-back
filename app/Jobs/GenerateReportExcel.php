@@ -42,9 +42,9 @@ class GenerateReportExcel implements ShouldQueue
         //generamos el reporte
         Excel::store(new UsersExport($this->start,$this->end),'reports/'.$this->nombreFile);
         //registramos en la bd
-        Report::create([
+        /* Report::create([
             'title'=>$this->title,
             'report_link'=> Storage::url('reports/'.$this->nombreFile)
-        ]);
+        ]); */
     }
 }
