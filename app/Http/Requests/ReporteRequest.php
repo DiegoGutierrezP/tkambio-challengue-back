@@ -28,11 +28,11 @@ class ReporteRequest extends FormRequest
         if($this->isMethod('post')){
             $reglas = [
                 'title' => 'required|string',
-                'start'=>'required|date',
+                'start'=>'required|date|before:end',
                 'end'=>'required|date'
             ];
         }
-        if($this->route('report_id')){
+        if($this->isMethod('get') && $this->route('report_id')){
             $reglas = [
                 'id' => 'required|integer|exists:reports,id'
             ];
