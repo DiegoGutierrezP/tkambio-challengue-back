@@ -39,8 +39,12 @@ class UsersExport implements FromCollection,WithHeadings,WithColumnWidths
 
     public function collection()
     {
-        return User::select('id','name','email','birth_date')->where('birth_date','>=',$this->start)
-                        ->where('birth_date','<=',$this->end)
-                        ->get();
+        $users = User::orderBy('birth_date','DESC')
+        ->select('id','name','email','birth_date')
+        ->where('birth_date','>=',$this->start)
+        ->where('birth_date','<=',$this->end)
+        ->get();
+
+        return $users;
     }
 }

@@ -2,13 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use App\Exports\UsersExport;
 use App\Http\Requests\ReporteRequest;
 use App\Jobs\GenerateReportExcel;
 use App\Models\Report;
 use Exception;
 use Illuminate\Support\Facades\Storage;
-use Maatwebsite\Excel\Facades\Excel;
 use Illuminate\Support\Str;
 
 class ReporteController extends Controller
@@ -22,6 +20,8 @@ class ReporteController extends Controller
 
             Report::create([
                 'title'=>$request->title,
+                'startDate'=>$request->start,
+                'endDate'=>$request->end,
                 'report_link'=> Storage::url('reports/'.$nombreFile)
             ]);
 
