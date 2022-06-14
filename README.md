@@ -13,5 +13,8 @@
 4. Ejecutar comando(Para crear el enlace simbólico para archivos)
  - php artisan storage:link
 
-5. Probar api generar reporte
+5. Crear un dominio virtual con el nombre tkambio.test
+   https://electroniciot.com/crear-dominio-virtual-con-xampp-y-windows-10-2021
+
+6. Probar api generar reporte
  - para probar esta api , ejecutar el comando: php artisan queue:work
